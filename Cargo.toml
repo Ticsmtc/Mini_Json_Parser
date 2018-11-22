@@ -1,0 +1,6 @@
+[package]
+name = "Mini_Json_Parser"
+version = "0.1.0"
+authors = ["EvenC <stuffhello@icloud.com>"]
+
+[dependencies]
