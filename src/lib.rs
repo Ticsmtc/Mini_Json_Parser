@@ -12,16 +12,6 @@ mod jobject; //解析后生成的Json Object对象
 
 
 
-
-
-pub fn myfunction() -> String {
-    return "From my function".to_string();
-}
-
-pub struct PlainReader {
-    plain_text: String ,
-}
-
 impl PlainReader {
     pub fn from(input: &str) -> PlainReader {
         let input = input.to_string();

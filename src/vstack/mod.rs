@@ -1,10 +1,7 @@
 
-/*
-    用来存储JSON解析出的值，用栈存储便于配对
+extern crate Mini_Json_Parser;
+use Mini_Json_Parser::jobject::JsonObject;
 
-    ValueType 存储具体值类型
-
-*/
 
 enum StackValueType {
     Left_Brace(Option<JsonObject>),     //左花括号
@@ -24,7 +21,7 @@ pub struct ValueStack {
     解析Json使用的栈定义
 */
 pub struct ValueNode {
-    type: StackValueType,
+    type: Option<Box<StackValueType>>,
     next: Option<Box<ValueNode>>,
 }
 /*
@@ -40,13 +37,31 @@ impl ValueStack {
     fn insert(&mut self , input: StackValueType) {
         let t = self.top.take();
         let newitem = Some(ValueNode {
-            type: StackValueType,
+            type: Some(Box::new(input)),
             next: t
         });
         self.top = newitem;
     }
-    fn pop(&mut self) {
-        
+    fn pop(&mut self) -> Option<Box<StackValueType>> {
+        let mut t = self.top.take();
+    
+        match t {
+            None => { None },
+            Some(ref mut x) => {
+                let re = x.type.take();
+                self.top = x.next;
+                re 
+            }
+        }
+    }
+
+    fn check_top(&mut self) &Option<Box<StackValueType>> {
+        match self.top {
+            None => None,
+            Some(ref x) => {
+                &(x.type)
+            }
+        }
     }
 }
 
