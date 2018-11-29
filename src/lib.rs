@@ -6,12 +6,14 @@ mod tests {
     }
 }
 
-mod vstack;  //解析器使用的栈定义
+//mod vstack;  //解析器使用的栈定义
 mod jparser; //解析器状态机
-mod jobject; //解析后生成的Json Object对象
+mod jobject; //解析后生成的Json Object对象，和解析器的栈定义
 
 
-
+pub struct PlainReader {
+    plain_text: String,
+}
 impl PlainReader {
     pub fn from(input: &str) -> PlainReader {
         let input = input.to_string();
